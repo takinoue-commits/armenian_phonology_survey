@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hy">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Recording Session / Ձայնագրման Օրինակ</title>
+    <title>Voice Recording Session</title>
     
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Sylfaen', Arial; background-color: #f3f4f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial; background-color: #f3f4f6; }
         .recording-pulse { animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
     </style>
@@ -24,8 +24,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // --- 🔴 IMPORTANT: GAS Web App URL ---
-        // Replace "https://script.google.com/macros/s/AKfycbzr_3jGloRfLHEO2quk58oFtzLaetsiUY05UcG0jNecyoDq0b68dyKXLql7iQ9xLdPnkQ/exec" below with the URL issued according to the setup instructions.
+        // Google Apps Script URL
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzr_3jGloRfLHEO2quk58oFtzLaetsiUY05UcG0jNecyoDq0b68dyKXLql7iQ9xLdPnkQ/exec";
 
         const sentences = [
@@ -85,17 +84,17 @@
             { id: 54, text: "Ես ասում եմ միր գա։" },
             { id: 55, text: "Ես ասում եմ միր դա։" },
             { id: 56, text: "Ես ասում եմ միր բա։" },
-            { id: 57, text: "Ասա միր։ (Fast/Արագ)" },
-            { id: 58, text: "Ասա մեր։ (Fast/Արագ)" },
-            { id: 59, text: "Ասա մար։ (Fast/Արագ)" },
-            { id: 60, text: "Ասա մոր։ (Fast/Արագ)" },
-            { id: 61, text: "Ասա մուր։ (Fast/Արագ)" },
-            { id: 62, text: "Ասա սեր։ (Fast/Արագ)" },
-            { id: 63, text: "Ասա սեռ։ (Fast/Արագ)" },
-            { id: 64, text: "Ասա լուր։ (Fast/Արագ)" },
-            { id: 65, text: "Ասա լուռ։ (Fast/Արագ)" },
-            { id: 66, text: "Ասա սար։ (Fast/Արագ)" },
-            { id: 67, text: "Ասա սառ։ (Fast/Արագ)" }
+            { id: 57, text: "Ասա միր։ (Fast)" },
+            { id: 58, text: "Ասա մեր։ (Fast)" },
+            { id: 59, text: "Ասա մար։ (Fast)" },
+            { id: 60, text: "Ասա մոր։ (Fast)" },
+            { id: 61, text: "Ասա մուր։ (Fast)" },
+            { id: 62, text: "Ասա սեր։ (Fast)" },
+            { id: 63, text: "Ասա սեռ։ (Fast)" },
+            { id: 64, text: "Ասա լուր։ (Fast)" },
+            { id: 65, text: "Ասա լուռ։ (Fast)" },
+            { id: 66, text: "Ասա սար։ (Fast)" },
+            { id: 67, text: "Ասա սառ։ (Fast)" }
         ];
 
         const convertToWav = async (audioBlob) => {
@@ -307,10 +306,6 @@
                     alert("No recordings found.");
                     return;
                 }
-                if (GAS_WEB_APP_URL === "YOUR_GAS_WEB_APP_URL_HERE") {
-                    alert("Error: Please set GAS_WEB_APP_URL in the source code.");
-                    return;
-                }
 
                 setIsUploading(true);
                 setUploadStatus({ type: 'info', message: 'Converting to WAV and creating ZIP...' });
@@ -333,8 +328,7 @@
                     await Promise.all(conversionPromises);
                     setUploadProgress(40);
 
-                    const demoText = `
-=== Participant Demographics ===
+                    const demoText = `=== Participant Demographics ===
 ID: ${demographics.participantId}
 Year of Birth: ${demographics.birthYear}
 Gender: ${demographics.gender}
@@ -345,8 +339,7 @@ Native Language: ${demographics.nativeLanguage}
 Other Languages: ${demographics.otherLanguages}
 Years outside home: ${demographics.yearsOutside}
 Speech Disorder: ${demographics.speechDisorder}
-================================
-                    `;
+================================`;
                     zip.file(`${partId}_demographics.txt`, demoText);
 
                     setUploadStatus({ type: 'info', message: 'Compressing data...' });
@@ -391,7 +384,7 @@ Speech Disorder: ${demographics.speechDisorder}
                     <div className="bg-slate-800 text-white pt-10 pb-16 px-4">
                         <div className="max-w-4xl mx-auto">
                             <h1 className="text-3xl font-bold mb-2">Voice Recording Session</h1>
-                            <p className="text-slate-300">Ձայնագրման Օրինակ - Linguistic Study</p>
+                            <p className="text-slate-300">Linguistic Study</p>
                             
                             <div className="mt-4 text-sm text-slate-400 bg-slate-800/50 p-4 rounded-lg border border-slate-600">
                                 <p className="font-semibold text-slate-200 mb-1">Researcher Information</p>
@@ -408,24 +401,52 @@ Speech Disorder: ${demographics.speechDisorder}
                                         <input type="text" name="participantId" value={demographics.participantId} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. P001" required />
                                     </div>
                                     <div>
-                                        <label className="block text-sm text-slate-300 mb-1">Year of Birth (Ծննդյան տարեթիվ)</label>
+                                        <label className="block text-sm text-slate-300 mb-1">Year of Birth</label>
                                         <input type="text" name="birthYear" value={demographics.birthYear} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="YYYY" />
                                     </div>
                                     <div>
-                                        <label className="block text-sm text-slate-300 mb-1">Gender (Սեռ)</label>
+                                        <label className="block text-sm text-slate-300 mb-1">Gender</label>
                                         <select name="gender" value={demographics.gender} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500">
                                             <option value="">Select...</option>
-                                            <option value="Male">Male (Արական)</option>
-                                            <option value="Female">Female (Իգական)</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                             <option value="Prefer not to say">Prefer not to say</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="block text-sm text-slate-300 mb-1">Armenian Dialect (Արևելահայերեն թե՞...)</label>
+                                        <label className="block text-sm text-slate-300 mb-1">Armenian Dialect</label>
                                         <select name="dialect" value={demographics.dialect} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500">
                                             <option value="">Select...</option>
                                             <option value="Eastern">Eastern (e.g. Armenia, Iran)</option>
                                             <option value="Western">Western (e.g. Lebanon, Syria)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">City / Town of Origin</label>
+                                        <input type="text" name="city" value={demographics.city} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Yerevan" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">Country of Origin</label>
+                                        <input type="text" name="country" value={demographics.country} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Armenia" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">Native Language(s)</label>
+                                        <input type="text" name="nativeLanguage" value={demographics.nativeLanguage} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Armenian" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">Other Languages Spoken</label>
+                                        <input type="text" name="otherLanguages" value={demographics.otherLanguages} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. English, Russian" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">Years living outside home region</label>
+                                        <input type="number" name="yearsOutside" value={demographics.yearsOutside} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="e.g. 5" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm text-slate-300 mb-1">History of speech/hearing disorders?</label>
+                                        <select name="speechDisorder" value={demographics.speechDisorder} onChange={handleDemoChange} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+                                            <option value="">Select...</option>
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
                                         </select>
                                     </div>
                                 </div>
