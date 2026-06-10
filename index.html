@@ -27,73 +27,38 @@
         // Google Apps Script URL
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzr_3jGloRfLHEO2quk58oFtzLaetsiUY05UcG0jNecyoDq0b68dyKXLql7iQ9xLdPnkQ/exec";
 
+        // Scientifically reduced list focusing on critical phonetic environments (/i/, /u/, /a/)
+        // Total: 26 items (approx. 3-5 minutes recording time)
         const sentences = [
+            // Part 1: Everyday & Filler sentences
             { id: 1, text: "Այսօր եղանակը շատ լավն է։" },
             { id: 2, text: "Այդ ջուրը սառն է, հիմա խմի՛ր։" },
             { id: 3, text: "Կատուն քնած է բազմոցին։" },
             { id: 4, text: "Ինձ պետք է միայն լուր։" },
-            { id: 5, text: "Այս սարը շատ բարձր է։" },
-            { id: 6, text: "Ես սիրում եմ տաք թեյ խմել։" },
-            { id: 7, text: "Այսօր մենք ուրախ ենք։" },
-            { id: 8, text: "Ամեն օր սուրճ եմ խմում։" },
-            { id: 9, text: "Մեր տունը գտնվում է մոտակայքում։" },
-            { id: 10, text: "Նա նոր շոր ունի։" },
-            { id: 11, text: "Ճաշը շատ համեղ էր։" },
-            { id: 12, text: "Այդ մարդը նոր շոր էր հագել։" },
-            { id: 13, text: "Տե՛ս, ինչ մեծ է։" },
-            { id: 14, text: "Սա իմ հայրն է։" },
-            { id: 15, text: "Շոր հագի՛ր։" },
-            { id: 17, text: "Նավը գցեց իր ծանր խարիսխը։" },
-            { id: 18, text: "Այդ քարի վրա ոչինչ չկա։" },
-            { id: 19, text: "Ես զգում եմ քո մեծ սերը։" },
-            { id: 20, text: "Նա ուսումնասիրում է այդ սեռը։" },
-            { id: 21, text: "Ես ասում եմ «միր» հիմա։" },
-            { id: 22, text: "Ես ասում եմ «միրա» հիմա։" },
-            { id: 23, text: "Ես ասում եմ «լուր» հիմա։" },
-            { id: 24, text: "Ես ասում եմ «լուրի» հիմա։" },
-            { id: 25, text: "Ես ասում եմ «սար» հիմա։" },
-            { id: 26, text: "Ես ասում եմ «սարի» հիմա։" },
-            { id: 27, text: "Ես ասում եմ «մեր» հիմա։" },
-            { id: 28, text: "Ես ասում եմ «մար» հիմա։" },
-            { id: 29, text: "Ես ասում եմ «մոր» հիմա։" },
-            { id: 30, text: "Ես ասում եմ «մուր» հիմա։" },
-            { id: 31, text: "Ես ասում եմ «սեր» հիմա։" },
-            { id: 32, text: "Ես ասում եմ «սեռ» հիմա։" },
-            { id: 33, text: "Ես ասում եմ «լուռ» հիմա։" },
-            { id: 34, text: "Ես ասում եմ «սառ» հիմա։" },
-            { id: 35, text: "Ասա «միր»։" },
-            { id: 36, text: "Ասա «մեր»։" },
-            { id: 37, text: "Ասա «մար»։" },
-            { id: 38, text: "Ասա «մոր»։" },
-            { id: 39, text: "Ասա «մուր»։" },
-            { id: 40, text: "Ասա «սեր»։" },
-            { id: 41, text: "Ասա «սեռ»։" },
-            { id: 42, text: "Ասա «լուր»։" },
-            { id: 43, text: "Ասա «լուռ»։" },
-            { id: 44, text: "Ասա «սար»։" },
-            { id: 45, text: "Ասա «սառ»։" },
-            { id: 46, text: "Ես լսեցի «միր» սարի մոտ։" },
-            { id: 47, text: "Ես լսեցի «մուր» սարի մոտ։" },
-            { id: 48, text: "Ես լսեցի «մար» սարի մոտ։" },
-            { id: 49, text: "Ես լսեցի «միր, շոր» այսօր։" },
-            { id: 50, text: "Ես լսեցի «մուր, շոր» այսօր։" },
-            { id: 51, text: "Ես ասում եմ «միր կա»։" },
-            { id: 52, text: "Ես ասում եմ «միր տա»։" },
-            { id: 53, text: "Ես ասում եմ «միր պա»։" },
-            { id: 54, text: "Ես ասում եմ «միր գա»։" },
-            { id: 55, text: "Ես ասում եմ «միր դա»։" },
-            { id: 56, text: "Ես ասում եմ «միր բա»։" },
-            { id: 57, text: "Ասա միր։ (Fast)" },
-            { id: 58, text: "Ասա մեր։ (Fast)" },
-            { id: 59, text: "Ասա մար։ (Fast)" },
-            { id: 60, text: "Ասա մոր։ (Fast)" },
-            { id: 61, text: "Ասա մուր։ (Fast)" },
-            { id: 62, text: "Ասա սեր։ (Fast)" },
-            { id: 63, text: "Ասա սեռ։ (Fast)" },
-            { id: 64, text: "Ասա լուր։ (Fast)" },
-            { id: 65, text: "Ասա լուռ։ (Fast)" },
-            { id: 66, text: "Ասա սար։ (Fast)" },
-            { id: 67, text: "Ասա սառ։ (Fast)" }
+            { id: 5, text: "Ես սիրում եմ տաք թեյ խմել։" },
+            { id: 6, text: "Այսօր մենք ուրախ ենք։" },
+            { id: 7, text: "Նա նոր շոր ունի։" },
+            { id: 8, text: "Այս սենյակում լռություն է։" },
+            { id: 9, text: "Այդ մարդը նոր շոր էր հագել։" },
+            { id: 10, text: "Նավը գցեց իր ծանր խարիսխը։" },
+            // Part 2: Carrier phrases with Target/Minimal pairs
+            { id: 11, text: "Ես ասում եմ «միր» հիմա։" },
+            { id: 12, text: "Ես ասում եմ «միրա» հիմա։" },
+            { id: 13, text: "Ես ասում եմ «մուր» հիմա։" },
+            { id: 14, text: "Ես ասում եմ «մուրի» հիմա։" },
+            { id: 15, text: "Ես ասում եմ «սար» հիմա։" },
+            { id: 16, text: "Ես ասում եմ «սարի» հիմա։" },
+            { id: 17, text: "Ես ասում եմ «լուռ» հիմա։" },
+            { id: 18, text: "Ես ասում եմ «սառ» հիմա։" },
+            // Part 3: Fast reading task for hypoarticulation
+            { id: 19, text: "Ասա «միր»։ (Fast)" },
+            { id: 20, text: "Ասա «միրա»։ (Fast)" },
+            { id: 21, text: "Ասա «մուր»։ (Fast)" },
+            { id: 22, text: "Ասա «մուրի»։ (Fast)" },
+            { id: 23, text: "Ասա «սար»։ (Fast)" },
+            { id: 24, text: "Ասա «սարի»։ (Fast)" },
+            { id: 25, text: "Ասա «լուռ»։ (Fast)" },
+            { id: 26, text: "Ասա «սառ»։ (Fast)" }
         ];
 
         const convertToWav = async (audioBlob) => {
@@ -386,16 +351,41 @@ Speech Disorder: ${demographics.speechDisorder}
                             <p className="text-slate-300">Linguistic Study</p>
                             
                             <div className="mt-4 text-sm text-slate-400 bg-slate-800/50 p-4 rounded-lg border border-slate-600">
-                                <p className="font-semibold text-slate-200 mb-1">Researcher Information</p>
-                                <p>Name: Takuya Inoue</p>
-                                <p>Affiliation: Ritsumeikan University Language Education Center</p>
-                                <p>Contact: <a href="mailto:takinoue@pep-rg.jp" className="text-blue-400 hover:underline">takinoue@pep-rg.jp</a></p>
-                            </div>
+                            <p className="font-semibold text-slate-200 mb-1">Researcher Information</p>
+                            <p>Name: Takuya Inoue</p>
+                            <p>Affiliation: Ritsumeikan University Language Education Center</p>
+                            <p>Contact: <a href="mailto:takinoue@pep-rg.jp" className="text-blue-400 hover:underline">takinoue@pep-rg.jp</a></p>
+                        </div>
 
-                            <div className="mt-6 bg-blue-900/30 rounded-xl p-6 border border-blue-700">
-                                <h2 className="text-xl font-semibold mb-3 text-blue-300">
-                                    <i className="fas fa-info-circle mr-2"></i>Instructions for the Speaker
-                                </h2>
+                        {}
+                        <div className="mt-8 bg-amber-900/30 rounded-xl p-6 border border-amber-700">
+                            <h2 className="text-xl font-semibold mb-4 text-amber-300">
+                                <i className="fas fa-exclamation-triangle mr-2"></i>Acoustic Environment Checklist
+                            </h2>
+                            <p className="text-sm text-slate-300 mb-4">
+                                This research analyzes subtle acoustic features. Background noise or poor recording quality will make the data unusable. 
+                                <br/><strong>Please check the following boxes before proceeding:</strong>
+                            </p>
+                            <div className="space-y-3 text-sm text-slate-300">
+                                <label className="flex items-start gap-3 cursor-pointer p-2 hover:bg-slate-700/50 rounded">
+                                    <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required />
+                                    <span><strong>Quiet Room:</strong> I am in a quiet private room without other people, pets, or TV noise.</span>
+                                </label>
+                                <label className="flex items-start gap-3 cursor-pointer p-2 hover:bg-slate-700/50 rounded">
+                                    <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required />
+                                    <span><strong>AC/Fans OFF:</strong> I have temporarily turned off air conditioners, fans, or air purifiers.</span>
+                                </label>
+                                <label className="flex items-start gap-3 cursor-pointer p-2 hover:bg-slate-700/50 rounded">
+                                    <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required />
+                                    <span><strong>Device Placement:</strong> My device is placed on a desk, approximately 15-20 cm away from my mouth, slightly to the side to prevent breathing noise.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 bg-blue-900/30 rounded-xl p-6 border border-blue-700">
+                            <h2 className="text-xl font-semibold mb-3 text-blue-300">
+                                <i className="fas fa-info-circle mr-2"></i>Instructions for the Speaker
+                            </h2>
                                 <ul className="list-disc list-outside ml-5 text-slate-300 space-y-2 text-sm">
                                     <li>Please read the sentences naturally, at a <strong>normal, conversational speed</strong>.</li>
                                     <li>Some sentences contain made-up words (non-words) inserted for linguistic testing purposes (e.g., "միր", "լուրի", "մուր"). Please just read them naturally as they are written.</li>
@@ -480,8 +470,12 @@ Speech Disorder: ${demographics.speechDisorder}
                             </div>
                         </div>
 
+                        {}
                         <div className="space-y-2">
-                            {sentences.map((item) => (
+                            {React.useMemo(() => {
+                                // Randomize the array on mount to prevent order bias
+                                return [...sentences].sort(() => Math.random() - 0.5);
+                            }, []).map((item) => (
                                 <RecordingItem 
                                     key={item.id} 
                                     item={item} 
